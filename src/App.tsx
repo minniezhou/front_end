@@ -12,9 +12,15 @@ function App() {
       <Header />
       <Buttons></Buttons>
       <TextBox text="Output shows here..."></TextBox>
-      <div>
-        <TextBox text="Sent..."></TextBox>
-        <TextBox text="Received..."></TextBox>
+      <div className="flex-container">
+        <div className="flex-child">
+          <h3>Send</h3>
+          <TextBox text="Sent..."></TextBox>
+        </div>
+        <div className="flex-child">
+          <h3>Receive</h3>
+          <TextBox text="Received..."></TextBox>
+        </div>
       </div>
       <Footer />
     </div>
