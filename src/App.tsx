@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <Header />
       <Buttons></Buttons>
-      <TextBox text="Output shows here..."></TextBox>
+      <TextBox text={cxt.Error}></TextBox>
       <div className="flex-container">
         <div className="flex-child">
           <h3>Send</h3>

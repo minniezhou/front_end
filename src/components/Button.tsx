@@ -6,7 +6,32 @@ const Button: React.FC<{ name: string }> = (prop) => {
   return (
     <button
       onClick={() => {
-        cxt.SetRequest("empty request...");
+        fetch("http://localhost:8080", {
+          method: "POST",
+        })
+          .then((response) => {
+            if (!response.ok) {
+              cxt.SetError("fetching data error...");
+              return;
+            }
+            return response.json();
+          })
+          .then((data) => {
+            if (data.error) {
+              cxt.SetError(data.message);
+              return;
+            }
+            const output = JSON.stringify(data);
+            cxt.SetRequest("empty request...");
+            cxt.SetResponse(output);
+          })
+          .catch((error) => {
+            if (error) {
+              cxt.SetError(error.message);
+            } else {
+              cxt.SetError("Connection error");
+            }
+          });
       }}
       className="button"
     >
