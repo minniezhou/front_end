@@ -16,6 +16,16 @@ const Buttons = () => {
       message: "Test logging service from front end",
     },
   };
+  const sendEmailrequest = {
+    action: "send",
+    send: {
+      from: "min@test.com",
+      from_name: "Minnie Zhou",
+      to: "minniezhou@gmail.com",
+      subject: "Test from Front End",
+      body: "This is the test from front end button click",
+    },
+  };
   const cxt = useContext(InandOutCxt);
   type ClickInput = {
     url: string;
@@ -89,6 +99,17 @@ const Buttons = () => {
           });
         }}
         name="Test Logging"
+      ></Button>
+      <Button
+        OnClick={() => {
+          OnClick({
+            url: "http://localhost:8080/handle",
+            method: "POST",
+            input: JSON.stringify(sendEmailrequest, null, 4),
+            body: JSON.stringify(sendEmailrequest, null, 4),
+          });
+        }}
+        name="Test Sending Email"
       ></Button>
       <Button
         OnClick={() => {
