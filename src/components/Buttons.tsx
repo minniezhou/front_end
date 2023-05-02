@@ -16,6 +16,13 @@ const Buttons = () => {
       message: "Test logging service from front end",
     },
   };
+  const grpcloggingrequest = {
+    action: "logging",
+    log: {
+      name: "logging via GRPC",
+      message: "Test GRPC logging service from front end",
+    },
+  };
   const sendEmailrequest = {
     action: "send",
     send: {
@@ -99,6 +106,17 @@ const Buttons = () => {
           });
         }}
         name="Test Logging"
+      ></Button>
+      <Button
+        OnClick={() => {
+          OnClick({
+            url: "http://localhost:8080/grpclog",
+            method: "POST",
+            input: JSON.stringify(grpcloggingrequest, null, 4),
+            body: JSON.stringify(grpcloggingrequest, null, 4),
+          });
+        }}
+        name="Test Logging via GRPC"
       ></Button>
       <Button
         OnClick={() => {
