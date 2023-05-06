@@ -1,6 +1,8 @@
 import Button from "./Button";
 import { InandOutCxt } from "../store/context";
 import { useContext } from "react";
+
+const broker_url = process.env.BROKER_URL? process.env.BROKER_URL : "localhost"
 const Buttons = () => {
   const authrequest = {
     action: "authentication",
@@ -21,6 +23,13 @@ const Buttons = () => {
     log: {
       name: "logging via GRPC",
       message: "Test GRPC logging service from front end",
+    },
+  };
+    const queueloggingrequest = {
+    action: "logging",
+    log: {
+      name: "logging via Rabbit",
+      message: "Test logging service from front Rabbit",
     },
   };
   const sendEmailrequest = {
@@ -79,7 +88,7 @@ const Buttons = () => {
         name="Test Broker"
         OnClick={() => {
           OnClick({
-            url: "http://localhost:8080",
+            url: `http://${broker_url}:8080`,
             method: "POST",
             input: "empty request!",
           });
@@ -88,7 +97,7 @@ const Buttons = () => {
       <Button
         OnClick={() => {
           OnClick({
-            url: "http://localhost:8080/handle",
+            url: `http://${broker_url}:8080/handle`,
             method: "POST",
             input: JSON.stringify(authrequest, null, 4),
             body: JSON.stringify(authrequest, null, 4),
@@ -99,7 +108,7 @@ const Buttons = () => {
       <Button
         OnClick={() => {
           OnClick({
-            url: "http://localhost:8080/handle",
+            url: `http://${broker_url}:8080/handle`,
             method: "POST",
             input: JSON.stringify(loggingrequest, null, 4),
             body: JSON.stringify(loggingrequest, null, 4),
@@ -110,7 +119,7 @@ const Buttons = () => {
       <Button
         OnClick={() => {
           OnClick({
-            url: "http://localhost:8080/grpclog",
+            url: `http://${broker_url}:8080/grpclog`,
             method: "POST",
             input: JSON.stringify(grpcloggingrequest, null, 4),
             body: JSON.stringify(grpcloggingrequest, null, 4),
@@ -121,7 +130,18 @@ const Buttons = () => {
       <Button
         OnClick={() => {
           OnClick({
-            url: "http://localhost:8080/handle",
+            url: `http://${broker_url}:8080/handleviaqueue`,
+            method: "POST",
+            input: JSON.stringify(queueloggingrequest, null, 4),
+            body: JSON.stringify(queueloggingrequest, null, 4),
+          });
+        }}
+        name="Test Logging via Rabbit"
+      ></Button>
+      <Button
+        OnClick={() => {
+          OnClick({
+            url: `http://${broker_url}:8080/handle`,
             method: "POST",
             input: JSON.stringify(sendEmailrequest, null, 4),
             body: JSON.stringify(sendEmailrequest, null, 4),
